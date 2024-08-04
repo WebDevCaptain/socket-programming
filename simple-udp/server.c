@@ -9,7 +9,7 @@
 #define ACK "ACK"
 
 int main() {
-    int server_fd, client_fd;
+    int server_fd;
     struct sockaddr_in server_addr, client_addr;
     socklen_t addrlen = sizeof(client_addr);
     char buffer[BUF_SIZE];
