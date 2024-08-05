@@ -9,7 +9,7 @@
 
 int main() {
     int server_fd;
-    struct sockaddr_in server_addr;
+    struct sockaddr_in server_addr, client_addr;
     socklen_t addrlen;
     char buffer[BUF_SIZE];
     char msg = 'Y';
@@ -37,7 +37,7 @@ int main() {
     printf("Sent one byte to the server \n");
 
     // Receive Acknowledgement (ACK)
-    int n = recvfrom(server_fd, (char*)buffer, BUF_SIZE, MSG_WAITALL, (struct sockaddr*)&server_addr, &addrlen);
+    int n = recvfrom(server_fd, (char*)buffer, BUF_SIZE, MSG_WAITALL, (struct sockaddr*)&client_addr, &addrlen);
     buffer[n] = '\0';
 
     printf("Received message from server: %s \n", buffer);

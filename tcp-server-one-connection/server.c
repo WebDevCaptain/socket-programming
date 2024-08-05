@@ -14,7 +14,7 @@ int main() {
     socklen_t addr_len = sizeof(client_addr);
 
     // Create TCP streaming socket
-    if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
+    if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         perror("Failed to create TCP socket.");
         exit(EXIT_FAILURE);
     }
