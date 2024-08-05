@@ -13,10 +13,10 @@ void handleClient(int);
 
 int main() {
     int server_fd, client_fd;
-    struct sockaddr_in server_addr;
+    struct sockaddr_in server_addr, client_addr;
     socklen_t addrlen = sizeof(server_addr);
 
-    if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
+    if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         perror("Socket creation failed.");
         exit(EXIT_FAILURE);
     }
@@ -37,10 +37,12 @@ int main() {
         exit(EXIT_FAILURE);
     }
 
+    memset(&client_addr, 0, sizeof(client_addr));
+
     while (1) {
         printf("Server waiting for connection \n");
 
-        if ((client_fd = accept(server_fd, (struct sockaddr*)&server_addr, &addrlen)) < 0) {
+        if ((client_fd = accept(server_fd, (struct sockaddr*)&client_addr, &addrlen)) < 0) {
             perror("Accept failed.");
             close(server_fd);
             exit(EXIT_FAILURE);
